@@ -1,6 +1,6 @@
 import sqlite3
 
-db = sqlite3.connect('test.db')
+db = sqlite3.connect('test.db', check_same_thread = False)
 
 db.execute("""CREATE TABLE IF NOT EXISTS dati
     (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,vards 
@@ -12,4 +12,15 @@ def saglabat(vards):
           (vards)
           VALUES (:vards)
           """,{'vards':vards})
-db.commit()
+   db.commit()
+
+def datu_atgriesana():
+  dati = db.execute("SELECT * FROM dati")
+
+
+  rezultats = dati.fetchall()
+
+  for rinda in rezultats:
+   print("ID",rinda[0])
+   print("vards:",rinda[1])
+datu_atgriesana()
